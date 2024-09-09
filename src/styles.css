@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'Menlo Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Menlo Regular'), url('fonts/Menlo-Regular.woff') format('woff');
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #111;
+    font-family: 'Menlo Regular', 'Arial', sans-serif;
+    color: #fff;
+}
+
+#root {
+    height: 100vh;
+}
+
+.container {
+    max-width: 500px;
+    min-width: 350px;
+    height: inherit;
+    margin: 0 auto;
+    background-color: #222;
+    padding: 1.7rem;
+
+    h1 {
+        text-align: center;
+    }
+
+    .search-form {
+        margin: 3rem 1.5rem;
+        font-weight: bold;
+
+        .searchInputBox {
+            position: relative;
+            padding-top: 1rem;
+            
+            input {
+                width: 100%;
+                padding: 1rem;
+                background-color: #222;
+                border: 1px solid #888;
+                border-radius: 0.69rem;
+                outline: none;
+                font-size: 1rem;
+                font-family: 'Menlo Regular', 'Arial', sans-serif;
+                font-weight: bold;
+                color: #fff;
+            }
+
+            span {
+                position: absolute;
+                left: 0;
+                margin: 1.1rem 1.2rem;
+                padding: 0 0.8rem;
+                pointer-events: none;
+                font-size: 0.9rem;
+                color: #888;
+                transition: 0.3s;
+            }
+
+            input:valid,
+            input:focus {
+                border: 2px solid #fff;
+            }
+
+            input:valid ~ span,
+            input:focus ~ span {
+                color: #fff;
+                transform: translate(10px, -25px);
+                font-size: 0.8rem;
+                background-color: #222;
+                border-radius: 0.3rem;
+                border-left: 2px solid #fff;
+                border-right: 2px solid #fff;
+            }
+        }
+    }
+}
