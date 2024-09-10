@@ -25,64 +25,152 @@ body {
 }
 
 .container {
-    max-width: 500px;
+    max-width: 600px;
     min-width: 350px;
     height: inherit;
     margin: 0 auto;
-    background-color: #222;
     padding: 1.7rem;
+    background-color: #222;
+    font-weight: bold;
 
     h1 {
         text-align: center;
     }
 
-    .search-form {
-        margin: 3rem 1.5rem;
-        font-weight: bold;
 
-        .searchInputBox {
-            position: relative;
-            padding-top: 1rem;
-            
-            input {
-                width: 100%;
-                padding: 1rem;
-                background-color: #222;
-                border: 1px solid #888;
-                border-radius: 0.69rem;
-                outline: none;
-                font-size: 1rem;
-                font-family: 'Menlo Regular', 'Arial', sans-serif;
-                font-weight: bold;
-                color: #fff;
-            }
+    .searchInputBox {
+        margin: 3rem 4rem;
+        position: relative;
+        padding-top: 1rem;
+        overflow: hidden;
+        
+        input {
+            width: 100%;
+            padding: 1rem;
+            padding-left: 1.8rem;
+            background-color: #222;
+            border: 2px solid #888;
+            border-radius: 0.69rem;
+            outline: none;
+            font-size: 1rem;
+            font-family: 'Menlo Regular', 'Arial', sans-serif;
+            font-weight: bold;
+            color: #fff;
+        }
 
-            span {
-                position: absolute;
-                left: 0;
-                margin: 1.1rem 1.2rem;
-                padding: 0 0.8rem;
-                pointer-events: none;
-                font-size: 0.9rem;
-                color: #888;
-                transition: 0.3s;
-            }
+        span {
+            position: absolute;
+            left: 0;
+            margin: 1.2rem;
+            padding: 0 0.8rem;
+            pointer-events: none;
+            font-size: 0.9rem;
+            color: #888;
+            transition: 0.3s;
+        }
 
-            input:valid,
-            input:focus {
-                border: 2px solid #fff;
-            }
+        .search-icon {
+            position: absolute;
+            top: 0.97rem;
+            right: 0;
+            padding: .5rem 1rem;
+            background-color: #555;
+            border: 1px solid #888;
+            border-top-right-radius: 0.69rem;
+            border-bottom-right-radius: 0.69rem;
+        }
 
-            input:valid ~ span,
-            input:focus ~ span {
-                color: #fff;
-                transform: translate(10px, -25px);
-                font-size: 0.8rem;
-                background-color: #222;
-                border-radius: 0.3rem;
-                border-left: 2px solid #fff;
-                border-right: 2px solid #fff;
+        input:valid,
+        input:focus,
+        input:valid ~ .search-icon,
+        input:focus ~ .search-icon{
+            border: 2px solid #fff;
+        }
+
+        input:valid ~ span,
+        input:focus ~ span {
+            color: #fff;
+            transform: translate(10px, -25px);
+            font-size: 0.8rem;
+            background-color: #222;
+            border-radius: 0.3rem;
+            border-left: 2px solid #fff;
+            border-right: 2px solid #fff;
+        }
+
+        .search-icon > svg {
+            width: 2rem;
+        }
+    }
+
+    .gh-users-container {
+        margin-top: 1.5rem;
+        
+        .gh-users-list {
+            scroll-behavior: smooth;
+
+            .gh-user-card {
+                display: flex;
+                background-color: #333;
+                border-radius: 0.89rem;
+                margin-bottom: 1rem;
+
+                .gh-user-avatar {
+                    flex-basis: 40%;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                    border-top-right-radius: 9999px;
+                    border-bottom-right-radius: 9999px;
+                }
+
+                .gh-user-details {
+                    flex-grow: 2;
+                    padding: 1rem;
+                    color: #888;
+
+                    .gh-user-name {
+                        display: flex;
+                        gap: 0.5rem;
+                        align-items: end;
+                        margin-left: -15px;
+                        margin-bottom: 0.7rem;
+
+                        > a {
+                            text-decoration: none;
+                            color: #888;
+
+                            h2 {
+                                color: #fff;
+                            }
+                        }
+
+                        > a:hover {
+                            transition: 0.3s;
+                            transform: translateY(-3px);
+                        }
+
+                    }
+
+                    > p {
+                        font-weight: normal;
+                    }
+
+                    > p:not(:last-child) {
+                        margin-bottom: 0.6rem;
+                    }
+
+                    .location {
+                        margin-left: -5px;
+
+                    }
+
+                    .followers {
+                        margin-left: -12px;
+                    }
+                }
             }
         }
+
     }
 }
