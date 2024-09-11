@@ -1,22 +1,32 @@
 import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useQueries, useQuery } from '@tanstack/react-query'
 import { getGithubUser } from './api/gh-users'
 import GhUserCard from './GhUserCard'
 import SearchInputBox from './SearchInputBox'
 import GitHubIcon from './icons/github-mark-white.svg?react'
+import useDebounce from './customHooks/useDebounce'
 
 export default function App() {
   const [searchInput, setSearchInput] = useState("")
-  const { isPending, isError, data, error } = useQuery({
-    queryKey: ["githubUser", searchInput],
-    queryFn: () => getGithubUser(searchInput),
-    staleTime: 5 * 1000
-  }) 
 
-  console.log(data)
+  const debouncedValue = useDebounce(searchInput, 1000)
 
-  if (isPending) return <h1>Loading...</h1> 
-  if (isError) return <h1>Error Message: { error.message }</h1> 
+  //* placeholder data that processes the debounced input string and return this arr
+  const names = ['f', 'fu', 'fur', 'fura', 'furan', 'furant', 'furantu', 'furantut', 'furantutu', 'furantutur', 'furantuturu']
+
+  const queries = useQueries({
+    queries: names.map(char => ({
+      queryKey: ["ghuser", char],
+      queryFn: () => getGithubUser(char),
+      retry: false,
+      staleTime: 10 * 1000
+    })),
+    combine: (results) => {
+      return {
+        data: results.map(result => result.data),
+      }
+    }
+  })
 
   return (
     <>
@@ -26,7 +36,12 @@ export default function App() {
         <hr />
         <div className="gh-users-container">
           <ul className='gh-users-list'>
-            <GhUserCard key={ data.id } userData={ data } />
+            { ( queries.data ?? "No user/s found" )
+                                                .filter(data => data !== undefined)
+                                                .map(data => {
+                                                  return <GhUserCard key={ data.id } userData={ data } />
+            }) }
+
           </ul>
         </div>
       </div>
