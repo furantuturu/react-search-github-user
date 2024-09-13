@@ -1,5 +1,5 @@
 # Mini Project Series 15
-## React Search a GihHub User App
+## React Search A GihHub User App
 
 ### Features
 
